@@ -3,9 +3,11 @@
 # Full guide available at http://trevorstephens.com/
 
 # Set working directory and import datafiles
-setwd("~/Kaggle/Titanic")
-train <- read.csv("train.csv")
-test <- read.csv("test.csv")
+# setwd("~/Kaggle/Titanic")
+# train <- read.csv("train.csv")
+# test <- read.csv("test.csv")
+train <- read.csv(file.path("Kaggle_Data", "train.csv"))
+test <- read.csv(file.path("Kaggle_Data", "test.csv"))
 
 # Install and load required packages for fancy decision tree plotting
 library(rpart)
