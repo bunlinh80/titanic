@@ -10,13 +10,13 @@ train <- read.csv(file.path("Kaggle_Data", "train.csv"))
 test <- read.csv(file.path("Kaggle_Data", "test.csv"))
 
 # Install and load required packages for fancy decision tree plotting
-install.packages('rattle', dependencies = TRUE)
-install.packages('rpart.plot', dependencies = TRUE)
-install.packages('RColorBrewer', dependencies = TRUE)
-library(rpart)
-library(rattle)
-library(rpart.plot)
-library(RColorBrewer)
+# install.packages('rattle', dependencies = TRUE)
+# install.packages('rpart.plot', dependencies = TRUE)
+# install.packages('RColorBrewer', dependencies = TRUE)
+library("rpart")
+library("rattle")
+library("rpart.plot")
+library("RColorBrewer")
 
 # Recreate the gender model
 fit <- rpart(Survived ~ Sex, data=train, method="class")
@@ -33,7 +33,9 @@ fancyRpartPlot(fit)
 # Now let's make a prediction and write a submission file
 Prediction <- predict(fit, test, type = "class")
 submit <- data.frame(PassengerId = test$PassengerId, Survived = Prediction)
-write.csv(submit, file = "myfirstdtree.csv", row.names = FALSE)
+# write.csv(submit, file = "myfirstdtree.csv", row.names = FALSE)
+write.csv(submit, file = file.path("Output_Data", "myfirstdtree.csv"), row.names = FALSE)
+
 
 # Let's unleash the decision tree and let it grow to the max
 fit <- rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data=train,
@@ -43,7 +45,8 @@ fancyRpartPlot(fit)
 # Now let's make a prediction and write a submission file
 Prediction <- predict(fit, test, type = "class")
 submit <- data.frame(PassengerId = test$PassengerId, Survived = Prediction)
-write.csv(submit, file = "myfullgrowntree.csv", row.names = FALSE)
+# write.csv(submit, file = "myfullgrowntree.csv", row.names = FALSE)
+write.csv(submit, file = file.path("Output_Data", "myfullgrowntree.csv"), row.names = FALSE)
 
 # Manually trim a decision tree
 fit <- rpart(Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data=train,

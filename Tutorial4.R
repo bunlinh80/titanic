@@ -10,10 +10,10 @@ train <- read.csv(file.path("Kaggle_Data", "train.csv"))
 test <- read.csv(file.path("Kaggle_Data", "test.csv"))
 
 # Install and load required packages for fancy decision tree plotting
-library(rpart)
-library(rattle)
-library(rpart.plot)
-library(RColorBrewer)
+library("rpart")
+library("rattle")
+library("rpart.plot")
+library("RColorBrewer")
 
 # What's in a name?
 train$Name[1]
@@ -73,5 +73,5 @@ fancyRpartPlot(fit)
 # Now let's make a prediction and write a submission file
 Prediction <- predict(fit, test, type = "class")
 submit <- data.frame(PassengerId = test$PassengerId, Survived = Prediction)
-write.csv(submit, file = "engineeredfeaturestree.csv", row.names = FALSE)
+write.csv(submit, file = file.path("Output_Data", "engineeredfeaturestree.csv"), row.names = FALSE)
 
