@@ -3,9 +3,11 @@
 # Full guide available at http://trevorstephens.com/
 
 # Set working directory and import datafiles
-setwd("~/Kaggle/Titanic")
-train <- read.csv("train.csv")
-test <- read.csv("test.csv")
+# setwd("~/Kaggle/Titanic")
+# train <- read.csv("train.csv")
+# test <- read.csv("test.csv")
+train <- read.csv(file.path("Kaggle_Data", "train.csv"))
+test <- read.csv(file.path("Kaggle_Data", "test.csv"))
 
 # Examine structure of dataframe
 str(train)
@@ -19,5 +21,5 @@ test$Survived <- rep(0, 418)
 
 # Create submission dataframe and output to file
 submit <- data.frame(PassengerId = test$PassengerId, Survived = test$Survived)
-write.csv(submit, file = "theyallperish.csv", row.names = FALSE)
+write.csv(submit, file = file.path("Output_Data", "theyallperish.csv"), row.names = FALSE)
 
